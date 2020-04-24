@@ -33,9 +33,9 @@ namespace TicTacToe
                 throw new System.IndexOutOfRangeException();
             }
 
-            if (table[x, y] != "X" & table[x, y] != "Y")
+            if (table[x, y] == " ")
             {
-                table[x,y] = (player ==1) ? "X" : "O";
+                table[x, y] = (player == 1) ? "X" : "O";
             }
             else
             {
@@ -49,22 +49,27 @@ namespace TicTacToe
         public bool isFull()
         {
             var fuller = new List<string>(dim);
-            for (int j = 0; j < dim; j++)
+            foreach (string item in table)
             {
-                for (int i = 0; i < dim; i++)
-                {
-                    fuller.Add(Convert.ToString(table.GetValue(i, j)));
-                }
+                fuller.Add(item);
             }
-
-            if (fuller.Contains(" "))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            // for (int j = 0; j < dim; j++)
+            // {
+            //     for (int i = 0; i < dim; i++)
+            //     {
+            //        fuller.Add(Convert.ToString(table.GetValue(i, j))); 
+            //     }
+            //  } 
+            bool full = (fuller.Contains(" ")) ? false : true;
+            // if (fuller.Contains(" "))
+            // {
+            //     return false;
+            // }
+            // else
+            // {
+            //     return true;
+            // }
+            return full;
         }
         public void displayBoard()
         {
