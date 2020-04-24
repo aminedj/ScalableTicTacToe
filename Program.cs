@@ -35,30 +35,16 @@ namespace TicTacToe
 
             if (table[x, y] != "X" & table[x, y] != "Y")
             {
-                if (player == 1)
-                {
-                    table[x, y] = "X";
-                }
-                else
-                {
-                    table[x, y] = "O";
-                }
+                table[x,y] = (player ==1) ? "X" : "O";
             }
             else
             {
-                throw new Exception("Cell already filled, clear board before writting new value");
+                throw new Exception("Cell already filled");
             }
         }
         public void changeturn()
         {
-            if (turn == 1)
-            {
-                turn = 2;
-            }
-            else
-            {
-                turn = 1;
-            }
+            turn = (turn == 1) ? 2 : 1;
         }
         public bool isFull()
         {
@@ -127,7 +113,7 @@ namespace TicTacToe
             //check for second diagonal win
             for (int i = 0; i < dim; i++)
             {
-                checker.Add(Convert.ToChar(table[i,dim-1-i]));
+                checker.Add(Convert.ToChar(table[i, dim - 1 - i]));
             }
             if (!(checker.Distinct().Skip(1).Any()) & !(checker.Contains(' ')))
             {
@@ -232,22 +218,22 @@ namespace TicTacToe
                 newgame.changeturn();
                 goto nextturn;
             }
-            reask:
-                System.Console.WriteLine("play again? (Y/N)");
-                char playagain;
-                try
-                {
-                    playagain = Convert.ToChar(Console.ReadLine());
-                }
-                catch (System.FormatException)
-                {
-                    System.Console.WriteLine("Y OR N BITCH");
-                    goto reask;
-                }
-                if (playagain == 'y' | playagain == 'Y')
-                {
-                    goto start;
-                }
+        reask:
+            System.Console.WriteLine("play again? (Y/N)");
+            char playagain;
+            try
+            {
+                playagain = Convert.ToChar(Console.ReadLine());
+            }
+            catch (System.FormatException)
+            {
+                System.Console.WriteLine("Y OR N BITCH");
+                goto reask;
+            }
+            if (playagain == 'y' | playagain == 'Y')
+            {
+                goto start;
+            }
         }
     }
 }
