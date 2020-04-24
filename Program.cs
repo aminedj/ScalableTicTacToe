@@ -53,22 +53,7 @@ namespace TicTacToe
             {
                 fuller.Add(item);
             }
-            // for (int j = 0; j < dim; j++)
-            // {
-            //     for (int i = 0; i < dim; i++)
-            //     {
-            //        fuller.Add(Convert.ToString(table.GetValue(i, j))); 
-            //     }
-            //  } 
             bool full = (fuller.Contains(" ")) ? false : true;
-            // if (fuller.Contains(" "))
-            // {
-            //     return false;
-            // }
-            // else
-            // {
-            //     return true;
-            // }
             return full;
         }
         public void displayBoard()
@@ -166,48 +151,30 @@ namespace TicTacToe
             {
                 dimension = Convert.ToInt32(Console.ReadLine());
             }
-            catch (System.FormatException)
+            catch (Exception ex)
             {
-                System.Console.WriteLine("DEMNESION IN NUMBERZZZZ");
+                System.Console.WriteLine(ex.Message);
                 goto start;
                 throw;
             }
             var newgame = new tiktaktoe(dimension);
             System.Console.WriteLine("YOUR BOARD:");
-            newgame.displayBoard();
-            int choicex;
-            int choicey;
+            Char[] choice;
         nextturn:
+            newgame.displayBoard();
             System.Console.WriteLine("PLayer {0} turn", newgame.turn);
             System.Console.WriteLine("INPUT YOUR X Y");
+            choice = Console.ReadLine().ToCharArray();
+            if (choice[0] == 'e' & choice.Length == 1) goto reask;
             try
             {
-                System.Console.WriteLine("input x:");
-                choicex = Convert.ToInt32(Console.ReadLine());
-                System.Console.WriteLine("input y:");
-                choicey = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (System.FormatException)
-            {
-                System.Console.WriteLine("NUMBERZZZ");
-                goto nextturn;
-            }
-
-            try
-            {
-                newgame.Writevalue(choicex, choicey, newgame.turn);
-            }
-            catch (System.IndexOutOfRangeException)
-            {
-                System.Console.WriteLine("STAY WITHIN YOUR DIMENSIONS");
-                goto nextturn;
+                newgame.Writevalue(Convert.ToInt32((choice[0]).ToString()), Convert.ToInt32((choice[1]).ToString()), newgame.turn);
             }
             catch (Exception ex)
             {
                 System.Console.WriteLine(ex.Message);
                 goto nextturn;
             }
-            newgame.displayBoard();
             if (newgame.isFull())
             {
                 System.Console.WriteLine("its a tie !");
@@ -226,19 +193,8 @@ namespace TicTacToe
         reask:
             System.Console.WriteLine("play again? (Y/N)");
             char playagain;
-            try
-            {
-                playagain = Convert.ToChar(Console.ReadLine());
-            }
-            catch (System.FormatException)
-            {
-                System.Console.WriteLine("Y OR N BITCH");
-                goto reask;
-            }
-            if (playagain == 'y' | playagain == 'Y')
-            {
-                goto start;
-            }
+            playagain = Convert.ToChar(Console.ReadLine());
+            if (playagain == 'y' | playagain == 'Y') goto start;
         }
     }
 }
