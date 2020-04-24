@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Project1
+namespace TicTacToe
 {
     class tiktaktoe
     {
