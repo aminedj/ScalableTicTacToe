@@ -7,7 +7,7 @@ namespace TicTacToe
 {
     class tiktaktoe
     {
-        private bool won { get; set; }
+        private bool _won { get; set; }
         public int turn { get; set; }
         public int dim { get; set; }
         public string[,] table { get; set; }
@@ -24,7 +24,7 @@ namespace TicTacToe
             table = table1;
             dim = dimension;
             turn = 1;
-            won = false;
+            _won = false;
         }
         public void Writevalue(int x, int y, int player)
         {
@@ -32,11 +32,7 @@ namespace TicTacToe
             {
                 throw new System.IndexOutOfRangeException();
             }
-
-            if (table[x, y] == " ")
-            {
-                table[x, y] = (player == 1) ? "X" : "O";
-            }
+            if (table[x, y] == " ") table[x, y] = (player == 1) ? "X" : "O";
             else
             {
                 throw new Exception("Cell already filled");
@@ -97,7 +93,7 @@ namespace TicTacToe
             }
             if (!(checker.Distinct().Skip(1).Any()) & !(checker.Contains(' ')))
             {
-                won = true;
+                _won = true;
             }
             checker.Clear();
             //check for second diagonal win
@@ -107,7 +103,7 @@ namespace TicTacToe
             }
             if (!(checker.Distinct().Skip(1).Any()) & !(checker.Contains(' ')))
             {
-                won = true;
+                _won = true;
             }
             //check for horizontal win
             for (int i = 0; i < dim; i++)
@@ -118,7 +114,7 @@ namespace TicTacToe
                 }
                 if (!(checker.Distinct().Skip(1).Any()) & !(checker.Contains(' ')))
                 {
-                    won = true;
+                    _won = true;
                 }
                 checker.Clear();
             }
@@ -131,11 +127,11 @@ namespace TicTacToe
                 }
                 if (!(checker.Distinct().Skip(1).Any()) & !(checker.Contains(' ')))
                 {
-                    won = true;
+                    _won = true;
                 }
                 checker.Clear();
             }
-            return won;
+            return _won;
         }
 
     }
@@ -155,7 +151,6 @@ namespace TicTacToe
             {
                 System.Console.WriteLine(ex.Message);
                 goto start;
-                throw;
             }
             var newgame = new tiktaktoe(dimension);
             System.Console.WriteLine("YOUR BOARD:");
